@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cep;
+use App\Services\ViaCep;
 use Illuminate\Http\Request;
 
 class CepController extends Controller{
@@ -13,11 +14,15 @@ class CepController extends Controller{
     }
    
     public function index($id=null){
+        $postalCode= new ViaCep();
+        $dd =$postalCode->getCep($id);
+        // $cep = $this->model->find($dd['cep']);    
+        
         //vai retornar tudo que estiver dentro da tabela
         if ($id === null) {
             return response($this->model->all());
         }    
-        $cep = $this->model->find($id);    
+        $cep = $this->model->find($dd['cep']);    
          // se $cep for nulo, significa que o registro com o ID especificado não foi encontrado.
         if ($cep === null) {
             return response('id não encontrado', 404); 

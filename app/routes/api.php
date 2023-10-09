@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/index/{id?}', [CepController::class, 'index'])->name('api.index');
 
 // Rota POST para criar um recurso em '/store'.
-Route::post('/store', [CepController::class, 'store'])->name('api.store');
+Route::post('/store/{id?}', [CepController::class, 'store'])->name('api.store');
 
 // Rota GET para editar um recurso com ID em '/edit/{id}'.
 Route::get('/edit/{id}', [CepController::class, 'edit'])->name('api.edit');
