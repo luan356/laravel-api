@@ -69,7 +69,7 @@ class CepController extends Controller{
         //
         $cep= $this->model->find($id);
         if(!$cep){
-            return response('PostalCode nao Localizado na tabela');
+            return response('PostalCode nao Localizado na tabela.');
         }
         try {
             $dados =$request->all();
