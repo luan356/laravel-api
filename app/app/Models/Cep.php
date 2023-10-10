@@ -9,10 +9,16 @@ class Cep extends Model
 {
     protected $table = 'cep';
     protected $fillable =[
-        'postalcode',
-        'rua',
+        'cep',
+        'logradouro',
+        'complemento',
         'bairro',
-        'cidade',
-        'uf'
+        'localidade',
+        'uf',
+        'ibge',
+        'gia',
+        'ddd',
+        'siafi',
+        'gia'
     ];
 }

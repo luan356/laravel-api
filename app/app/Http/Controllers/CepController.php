@@ -13,19 +13,19 @@ class CepController extends Controller{
         $this->model =$cep;
     }
    
-    public function index($id=null){
-        $postalCode= new ViaCep();
-        $dd =$postalCode->getCep($id);
-        // $cep = $this->model->find($dd['cep']);    
-        
+    public function index($id=null){  
+        // se $cep for nulo, significa que o registro com o ID especificado não foi encontrado.
+        $cep = $this->model->where('cep',$id)->first();    
+      
         //vai retornar tudo que estiver dentro da tabela
         if ($id === null) {
+            //é necessario que o cep tenha hifen
             return response($this->model->all());
         }    
-        $cep = $this->model->find($dd['cep']);    
-         // se $cep for nulo, significa que o registro com o ID especificado não foi encontrado.
         if ($cep === null) {
-            return response('id não encontrado', 404); 
+           $this->store($id);
+           return response('Cep inserido com sucesso');
+
         }    
         return response($cep);
     }
@@ -40,10 +40,13 @@ class CepController extends Controller{
     }
 
  
-    public function store(Request $request){
+    public function store($id){
+        $postalCode= new ViaCep();
+        $postalCode =$postalCode->getCep($id);
         try {           
-            $this->model->create($request->all());
-            return response('postalCode inserido com sucesso');
+            // $this->model->create($request->all());
+            $this->model->create($postalCode);
+            return response('Cep inserido com sucesso');
         } catch (\Throwable $th) {
             throw $th;
         }

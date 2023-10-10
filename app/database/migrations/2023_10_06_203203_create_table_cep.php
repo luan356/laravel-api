@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('cep', function (Blueprint $table) {
             $table->id();
-            $table->string('postalcode');
-            $table->string('rua');
-            $table->string('bairro');
-            $table->string('cidade');
-            $table->string('uf');
+            $table->string('cep')->nullable();
+            $table->string('logradouro')->nullable();
+            $table->string('complemento')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('localidade')->nullable();
+            $table->string('uf')->nullable();
+            $table->string('ibge')->nullable();
+            $table->string('ddd')->nullable();
             $table->timestamps();
         });
     }
